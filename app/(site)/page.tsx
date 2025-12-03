@@ -8,16 +8,7 @@ import Process from "@/components/Process";
 // Revalidate every 60 seconds
 export const revalidate = 60;
 
-import { SanityImageSource } from "@sanity/image-url";
-
-interface Project {
-  _id: string;
-  title: string;
-  slug: string;
-  coverImage: SanityImageSource;
-  gallery: SanityImageSource[];
-  completionDate: string;
-}
+import { Project } from "@/types/project";
 
 export default async function Home() {
   const query = groq`*[_type == "portfolioItem"] | order(creationDate desc) {

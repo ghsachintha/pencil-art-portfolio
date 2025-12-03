@@ -56,7 +56,7 @@ export default function Testimonials() {
     },
     {
       _id: "3",
-      name: "Emily Rostova",
+      name: "Emily Ross",
       role: "Private Client",
       quote:
         "The process was so smooth and professional. Receiving the final piece was an emotional moment for my family. Truly a masterpiece.",
@@ -70,7 +70,7 @@ export default function Testimonials() {
   if (displayTestimonials.length === 0) return null;
 
   return (
-    <section className="py-24 overflow-hidden bg-neutral-50 dark:bg-neutral-900/50">
+    <section className="py-24 overflow-hidden bg-surface-highlight">
       <div className="container px-4 mb-12 text-center">
         <h2 className="text-3xl font-serif font-bold text-primary mb-4">
           Kind Words
@@ -80,8 +80,8 @@ export default function Testimonials() {
 
       <div className="relative flex w-full overflow-hidden mask-gradient">
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-neutral-50 dark:from-neutral-900 to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-neutral-50 dark:from-neutral-900 to-transparent z-10" />
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-highlight to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-highlight to-transparent z-10" />
 
         <motion.div
           className="flex gap-8 py-4"
@@ -99,10 +99,10 @@ export default function Testimonials() {
             (testimonial, index) => (
               <div
                 key={`${testimonial._id}-${index}`}
-                className="flex-shrink-0 w-[350px] md:w-[450px] p-8 bg-white dark:bg-neutral-800 rounded-sm shadow-sm border border-neutral-100 dark:border-neutral-700"
+                className="flex-shrink-0 w-[350px] md:w-[450px] p-8 bg-surface rounded-sm shadow-sm border border-border"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden bg-neutral-200">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden bg-surface-highlight">
                     {testimonial.photo && (
                       <Image
                         src={urlFor(testimonial.photo)
@@ -119,10 +119,10 @@ export default function Testimonials() {
                     <h4 className="font-serif font-bold text-primary">
                       {testimonial.name}
                     </h4>
-                    <p className="text-sm text-secondary">{testimonial.role}</p>
+                    <p className="text-sm text-muted">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-secondary italic leading-relaxed">
+                <p className="text-muted italic leading-relaxed">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
               </div>

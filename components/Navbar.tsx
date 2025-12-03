@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -15,30 +17,33 @@ export default function Navbar() {
       opacity: 0,
       y: "-100%",
       transition: {
-        duration: 0.3,
-        ease: "easeInOut",
-        when: "afterChildren",
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
+        staggerChildren: 0.1,
+        staggerDirection: -1,
       },
     },
     open: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
-        ease: "easeInOut",
-        when: "beforeChildren",
+        duration: 0.5,
+        ease: [0.22, 1, 0.36, 1],
         staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants: Variants = {
-    closed: { opacity: 0, y: -20 },
+    closed: { opacity: 0, y: 20 },
     open: { opacity: 1, y: 0 },
   };
 
+  const isActive = (path: string) => pathname === path;
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full py-6 border-b border-secondary/10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full py-6 border-b border-border bg-background/80 backdrop-blur-md transition-all duration-300">
       <div className="container flex items-center justify-between px-4 md:px-6">
         <Link
           href="/"
@@ -48,23 +53,32 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-secondary">
-          {["Work", "About", "Order Art", "Contact"].map((item) => (
-            <Link
-              key={item}
-              href={
-                item === "Work"
-                  ? "/"
-                  : item === "Order Art"
-                    ? "/order"
-                    : `/${item.toLowerCase()}`
-              }
-              className="relative group hover:text-primary transition-colors"
-            >
-              {item}
-              <span className="absolute left-0 -bottom-1 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
+          {["Work", "About", "Order Art", "Contact"].map((item) => {
+            const href =
+              item === "Work"
+                ? "/work"
+                : item === "Order Art"
+                  ? "/order"
+                  : `/${item.toLowerCase()}`;
+
+            return (
+              <Link
+                key={item}
+                href={href}
+                className={`relative group hover:text-primary transition-colors ${
+                  isActive(href) ? "text-primary" : ""
+                }`}
+              >
+                {item}
+                <span
+                  className={`absolute left-0 -bottom-1 h-px bg-primary transition-all duration-300 ${
+                    isActive(href) ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
+            );
+          })}
           <ThemeToggle />
         </div>
 
@@ -73,7 +87,7 @@ export default function Navbar() {
           <ThemeToggle />
           <button
             onClick={toggleMenu}
-            className="p-2 text-neutral-900 dark:text-neutral-100 focus:outline-none"
+            className="p-2 text-main focus:outline-none"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -106,11 +120,11 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed inset-0 bg-white dark:bg-neutral-900 flex flex-col items-center justify-center md:hidden"
+              className="fixed inset-0 bg-surface flex flex-col items-center justify-center md:hidden"
             >
               <div className="flex flex-col gap-8 text-2xl font-serif font-medium text-center">
                 {[
-                  { name: "Work", href: "/" },
+                  { name: "Work", href: "/work" },
                   { name: "About", href: "/about" },
                   { name: "Order Art", href: "/order" },
                   { name: "Contact", href: "/contact" },
@@ -119,7 +133,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={toggleMenu}
-                      className="hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                      className="hover:text-main transition-colors"
                     >
                       {link.name}
                     </Link>

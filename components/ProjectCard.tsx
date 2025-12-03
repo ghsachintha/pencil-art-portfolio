@@ -49,7 +49,7 @@ export default function ProjectCard({
       <motion.div
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative aspect-[4/5] overflow-hidden bg-neutral-100 mb-4 rounded-sm"
+        className="relative aspect-[4/5] overflow-hidden bg-surface-highlight mb-4 rounded-sm"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           setIsHovered(false);
@@ -76,14 +76,14 @@ export default function ProjectCard({
         </AnimatePresence>
 
         {/* Overlay for hover state */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none" />
+        <div className="absolute inset-0 bg-transparent group-hover:bg-surface-overlay transition-colors duration-300 pointer-events-none" />
       </motion.div>
       <div className="flex justify-between items-baseline group-focus-visible:underline">
-        <h3 className="text-xl font-serif font-medium text-neutral-900 group-hover:text-neutral-600 transition-colors">
+        <h3 className="text-xl font-serif font-medium text-main group-hover:text-muted transition-colors">
           {title}
         </h3>
         {completionDate && (
-          <span className="text-sm text-neutral-500 font-sans">
+          <span className="text-sm text-muted font-sans">
             {new Date(completionDate).getFullYear()}
           </span>
         )}

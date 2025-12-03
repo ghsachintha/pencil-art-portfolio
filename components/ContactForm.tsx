@@ -37,7 +37,7 @@ export default function ContactForm() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="text-center p-8 bg-neutral-50 dark:bg-neutral-800 rounded-sm border border-neutral-200 dark:border-neutral-700"
+            className="text-center p-8 bg-surface rounded-sm border border-border"
           >
             <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg
@@ -57,7 +57,7 @@ export default function ContactForm() {
             <h3 className="text-2xl font-serif font-bold text-primary mb-2">
               Message Sent!
             </h3>
-            <p className="text-secondary mb-6">
+            <p className="text-muted mb-6">
               Thank you for reaching out. I&apos;ll get back to you as soon as
               possible.
             </p>
@@ -81,7 +81,7 @@ export default function ContactForm() {
               <div className="space-y-2">
                 <label
                   htmlFor="name"
-                  className="text-sm font-medium text-secondary"
+                  className="text-sm font-medium text-muted"
                 >
                   Name
                 </label>
@@ -90,14 +90,14 @@ export default function ContactForm() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                   placeholder="John Doe"
                 />
               </div>
               <div className="space-y-2">
                 <label
                   htmlFor="email"
-                  className="text-sm font-medium text-secondary"
+                  className="text-sm font-medium text-muted"
                 >
                   Email
                 </label>
@@ -106,7 +106,7 @@ export default function ContactForm() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+                  className="w-full px-4 py-3 bg-surface border border-border rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                   placeholder="john@example.com"
                 />
               </div>
@@ -115,7 +115,7 @@ export default function ContactForm() {
             <div className="space-y-2">
               <label
                 htmlFor="subject"
-                className="text-sm font-medium text-secondary"
+                className="text-sm font-medium text-muted"
               >
                 Subject
               </label>
@@ -124,7 +124,7 @@ export default function ContactForm() {
                 id="subject"
                 name="subject"
                 required
-                className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+                className="w-full px-4 py-3 bg-surface border border-border rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                 placeholder="Commission Inquiry"
               />
             </div>
@@ -132,7 +132,7 @@ export default function ContactForm() {
             <div className="space-y-2">
               <label
                 htmlFor="message"
-                className="text-sm font-medium text-secondary"
+                className="text-sm font-medium text-muted"
               >
                 Message
               </label>
@@ -141,7 +141,7 @@ export default function ContactForm() {
                 name="message"
                 required
                 rows={5}
-                className="w-full px-4 py-3 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all resize-none"
+                className="w-full px-4 py-3 bg-surface border border-border rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all resize-none"
                 placeholder="Tell me about your project..."
               />
             </div>
@@ -155,7 +155,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="w-full py-4 bg-primary text-white font-serif font-bold rounded-sm hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 bg-primary text-inverted font-serif font-bold rounded-sm hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === "submitting" ? "Sending..." : "Send Message"}
             </button>

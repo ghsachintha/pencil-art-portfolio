@@ -237,17 +237,12 @@ export default function OrderWizard() {
   if (status === "success") {
     return (
       <div className="text-center py-12">
-        <h2 className="text-3xl font-serif text-neutral-900 mb-4">
-          Order Received
-        </h2>
-        <p className="text-neutral-600 mb-6">
+        <h2 className="text-3xl font-serif text-main mb-4">Order Received</h2>
+        <p className="text-muted mb-6">
           Thank you for your order. I have received your request and will review
           the details shortly.
         </p>
-        <Link
-          href="/"
-          className="text-neutral-900 underline hover:text-neutral-700"
-        >
+        <Link href="/" className="text-main underline hover:text-muted">
           Back to Home
         </Link>
       </div>
@@ -267,7 +262,7 @@ export default function OrderWizard() {
           <div
             key={i}
             className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
-              step === i ? "bg-neutral-900" : "bg-neutral-200"
+              step === i ? "bg-primary" : "bg-border"
             }`}
           />
         ))}
@@ -287,7 +282,7 @@ export default function OrderWizard() {
               <div className="space-y-6">
                 <h2 className="text-2xl font-serif mb-4">Contact Info</h2>
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                  <label className="block text-sm font-medium text-main mb-1">
                     Your Name
                   </label>
                   <input
@@ -298,7 +293,7 @@ export default function OrderWizard() {
                     className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
                       errors.name
                         ? "border-red-500"
-                        : "border-neutral-200 focus:border-neutral-900"
+                        : "border-border focus:border-primary"
                     }`}
                     placeholder="John Doe"
                   />
@@ -309,7 +304,7 @@ export default function OrderWizard() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                  <label className="block text-sm font-medium text-main mb-1">
                     Email Address
                   </label>
                   <input
@@ -320,7 +315,7 @@ export default function OrderWizard() {
                     className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
                       errors.email
                         ? "border-red-500"
-                        : "border-neutral-200 focus:border-neutral-900"
+                        : "border-border focus:border-primary"
                     }`}
                     placeholder="john@example.com"
                   />
@@ -337,7 +332,7 @@ export default function OrderWizard() {
               <div className="space-y-6">
                 <h2 className="text-2xl font-serif mb-4">Order Details</h2>
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                  <label className="block text-sm font-medium text-main mb-1">
                     Preferred Size
                   </label>
                   <select
@@ -347,7 +342,7 @@ export default function OrderWizard() {
                     className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
                       errors.size
                         ? "border-red-500"
-                        : "border-neutral-200 focus:border-neutral-900"
+                        : "border-border focus:border-primary"
                     }`}
                   >
                     <option value="" disabled>
@@ -364,7 +359,7 @@ export default function OrderWizard() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                  <label className="block text-sm font-medium text-main mb-1">
                     Additional Details
                   </label>
                   <textarea
@@ -372,7 +367,7 @@ export default function OrderWizard() {
                     rows={4}
                     value={formData.details}
                     onChange={handleInputChange}
-                    className="w-full border-2 border-neutral-200 bg-transparent py-2 px-3 rounded-sm focus:border-neutral-900 focus:outline-none"
+                    className="w-full border-2 border-border bg-transparent py-2 px-3 rounded-sm focus:border-primary focus:outline-none"
                     placeholder="Tell me about the subject..."
                   />
                 </div>
@@ -386,13 +381,13 @@ export default function OrderWizard() {
                   className={`flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md cursor-pointer ${
                     errors.photo
                       ? "border-red-300"
-                      : "border-neutral-300 hover:border-neutral-400"
+                      : "border-strong hover:border-primary"
                   }`}
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <div className="space-y-1 text-center">
                     <svg
-                      className="mx-auto h-12 w-12 text-neutral-400"
+                      className="mx-auto h-12 w-12 text-muted"
                       stroke="currentColor"
                       fill="none"
                       viewBox="0 0 48 48"
@@ -404,8 +399,8 @@ export default function OrderWizard() {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <div className="text-sm text-neutral-600">
-                      <span className="font-medium text-neutral-900">
+                    <div className="text-sm text-muted">
+                      <span className="font-medium text-main">
                         {fileName ? fileName : "Upload a file"}
                       </span>
                       <input
@@ -416,9 +411,7 @@ export default function OrderWizard() {
                         onChange={handleFileChange}
                       />
                     </div>
-                    <p className="text-xs text-neutral-500">
-                      PNG, JPG up to 10MB
-                    </p>
+                    <p className="text-xs text-muted">PNG, JPG up to 10MB</p>
                   </div>
                 </div>
                 {errors.photo && (
@@ -430,7 +423,7 @@ export default function OrderWizard() {
             {step === 4 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-serif mb-4">Review Order</h2>
-                <div className="bg-neutral-50 p-4 rounded-sm space-y-2 text-sm">
+                <div className="bg-surface-highlight p-4 rounded-sm space-y-2 text-sm">
                   <p>
                     <span className="font-semibold">Name:</span> {formData.name}
                   </p>
@@ -448,14 +441,14 @@ export default function OrderWizard() {
                   <p>
                     <span className="font-semibold">File:</span> {fileName}
                   </p>
-                  <p className="pt-2 border-t border-neutral-200 mt-2">
+                  <p className="pt-2 border-t border-border mt-2">
                     <span className="font-bold text-lg">Total:</span>{" "}
                     <span className="font-bold text-lg">
                       LKR {PRICES[formData.size as keyof typeof PRICES]}
                     </span>
                   </p>
                 </div>
-                <p className="text-xs text-neutral-500">
+                <p className="text-xs text-muted">
                   By clicking &quot;Place Order&quot;, you agree to the pricing
                   and terms.
                 </p>
@@ -466,12 +459,12 @@ export default function OrderWizard() {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between mt-8 pt-4 border-t border-neutral-100">
+      <div className="flex justify-between mt-8 pt-4 border-t border-border">
         {step > 1 ? (
           <button
             onClick={prevStep}
             disabled={status === "uploading" || status === "processing_payment"}
-            className="px-6 py-2 text-neutral-600 hover:text-neutral-900 transition-colors disabled:opacity-50"
+            className="px-6 py-2 text-muted hover:text-main transition-colors disabled:opacity-50"
           >
             Back
           </button>
@@ -482,7 +475,7 @@ export default function OrderWizard() {
         {step < 4 ? (
           <button
             onClick={nextStep}
-            className="bg-neutral-900 text-white px-8 py-2 rounded-sm hover:bg-neutral-800 transition-colors"
+            className="bg-primary text-inverted px-8 py-2 rounded-sm hover:opacity-90 transition-colors"
           >
             Next
           </button>
@@ -490,12 +483,12 @@ export default function OrderWizard() {
           <button
             onClick={handlePayment}
             disabled={status === "uploading" || status === "processing_payment"}
-            className="bg-neutral-900 text-white px-8 py-2 rounded-sm hover:bg-neutral-800 transition-colors disabled:opacity-50 flex items-center gap-2"
+            className="bg-primary text-inverted px-8 py-2 rounded-sm hover:opacity-90 transition-colors disabled:opacity-50 flex items-center gap-2"
           >
             {status === "uploading" || status === "processing_payment" ? (
               <>
                 <svg
-                  className="animate-spin h-4 w-4 text-white"
+                  className="animate-spin h-4 w-4 text-inverted"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -524,9 +517,9 @@ export default function OrderWizard() {
       </div>
 
       {status === "uploading" && (
-        <div className="w-full bg-neutral-200 rounded-full h-1 mt-4">
+        <div className="w-full bg-border rounded-full h-1 mt-4">
           <div
-            className="bg-neutral-900 h-1 rounded-full transition-all duration-300"
+            className="bg-primary h-1 rounded-full transition-all duration-300"
             style={{ width: `${uploadProgress}%` }}
           ></div>
         </div>

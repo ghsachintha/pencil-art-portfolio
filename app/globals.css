@@ -1,49 +1,127 @@
 @import "tailwindcss";
 
+/* =========================================
+   CSS Variables
+   ========================================= */
 :root {
+  /* --- Primitive Colors (Base Palette) --- */
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
+
+  --color-base-neutral-50: #fafafa;
+  --color-base-neutral-100: #f5f5f5;
+  --color-base-neutral-200: #e5e5e5;
+  --color-base-neutral-300: #d4d4d4;
+  --color-base-neutral-400: #a3a3a3;
+  --color-base-neutral-500: #737373;
+  --color-base-neutral-600: #525252;
+  --color-base-neutral-700: #404040;
+  --color-base-neutral-800: #262626;
+  --color-base-neutral-900: #171717;
+  --color-base-neutral-950: #0a0a0a;
+
+  /* --- Semantic Tokens (Light Mode) --- */
+
+  /* Backgrounds */
   --color-background: #fcfbf9;
-  --color-foreground: #2b2b2b;
-  --color-primary: #2b2b2b;
-  --color-secondary: #555555;
-  --color-accent: #d4d4d4; /* Light gray for subtle borders/bg */
+  --color-surface: var(--color-base-white);
+  --color-surface-highlight: var(--color-base-neutral-50);
+  --color-surface-overlay: rgba(0, 0, 0, 0.05); /* Used for hovers */
+
+  /* Borders */
+  --color-border: var(--color-base-neutral-200);
+  --color-border-strong: var(--color-base-neutral-300);
+
+  /* Text */
+  --color-text-main: var(--color-base-neutral-900);
+  --color-text-muted: var(--color-base-neutral-500);
+  --color-text-inverted: var(--color-base-white);
+
+  /* Brand/Status */
+  --color-primary: var(--color-base-neutral-900);
+  --color-secondary: var(--color-base-neutral-500);
+  --color-accent: var(--color-base-neutral-300);
 }
 
 .dark {
+  /* --- Semantic Tokens (Dark Mode) --- */
+
+  /* Backgrounds */
   --color-background: #1a1a1a;
-  --color-foreground: #e5e5e5;
-  --color-primary: #e5e5e5;
-  --color-secondary: #a3a3a3;
-  --color-accent: #333333; /* Dark gray for subtle borders/bg */
+  --color-surface: var(--color-base-neutral-900);
+  --color-surface-highlight: var(--color-base-neutral-800);
+  --color-surface-overlay: rgba(255, 255, 255, 0.1); /* Used for hovers */
+
+  /* Borders */
+  --color-border: var(--color-base-neutral-800);
+  --color-border-strong: var(--color-base-neutral-700);
+
+  /* Text */
+  --color-text-main: var(--color-base-neutral-100);
+  --color-text-muted: var(--color-base-neutral-400);
+  --color-text-inverted: var(--color-base-neutral-900);
+
+  /* Brand/Status */
+  --color-primary: var(--color-base-neutral-100);
+  --color-secondary: var(--color-base-neutral-400);
+  --color-accent: var(--color-base-neutral-700);
 }
 
+/* =========================================
+   Theme Configuration
+   ========================================= */
 @theme {
+  /* Typography */
   --font-serif: var(--font-serif), serif;
   --font-sans: var(--font-sans), sans-serif;
+
+  /* Semantic Color Mapping */
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-surface-highlight: var(--color-surface-highlight);
+  --color-surface-overlay: var(--color-surface-overlay);
+
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+
+  --color-text-main: var(--color-text-main);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverted: var(--color-text-inverted);
+
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
 }
 
-/* Custom Utilities */
+/* =========================================
+   Custom Utilities
+   ========================================= */
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
   max-width: 1200px;
 }
 
+/* =========================================
+   Base Styles
+   ========================================= */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   ::selection {
-    background-color: var(--color-foreground);
+    background-color: var(--color-text-main);
     color: var(--color-background);
   }
 
   body {
     background-color: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--color-text-main);
     font-family: var(--font-sans);
   }
 
+  /* Typography Defaults */
   h1,
   h2,
   h3,
@@ -52,11 +130,12 @@
   h6 {
     font-family: var(--font-serif);
     font-weight: 700;
+    color: var(--color-text-main);
   }
 
-  /* Custom Focus Ring for Accessibility */
+  /* Accessibility */
   :focus-visible {
-    outline: 2px solid var(--color-foreground);
+    outline: 2px solid var(--color-text-main);
     outline-offset: 2px;
   }
 }

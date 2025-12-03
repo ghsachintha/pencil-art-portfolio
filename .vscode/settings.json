@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["groq", "payhere"]
+  "cSpell.words": ["groq", "payhere"],
+  "css.lint.unknownAtRules": "ignore"
 }
