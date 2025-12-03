@@ -4,8 +4,10 @@ import { useState, useRef, MouseEvent } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface MagnifierProps {
-  image: any;
+  image: SanityImageSource;
 }
 
 export default function Magnifier({ image }: MagnifierProps) {

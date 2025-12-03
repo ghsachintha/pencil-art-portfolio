@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NoiseOverlay from "@/components/NoiseOverlay";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import Cursor from "@/components/Cursor";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -29,14 +31,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${playfair.variable} ${lato.variable} antialiased bg-[var(--color-background)] text-[var(--color-foreground)] font-sans flex flex-col min-h-screen`}
+        className={`${playfair.variable} ${lato.variable} antialiased bg-[var(--color-background)] text-[var(--color-foreground)] font-sans flex flex-col min-h-screen transition-colors duration-300`}
       >
-        <NoiseOverlay />
-        <Navbar />
-        <main className="flex-grow pt-24">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Cursor />
+          <NoiseOverlay />
+          <Navbar />
+          <main className="flex-grow pt-24">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

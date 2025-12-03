@@ -178,3 +178,23 @@ export async function generatePayHereHash(orderId: string, amount: string) {
     isProduction: true,
   };
 }
+
+export async function submitContactForm(formData: FormData) {
+  // Simulate network delay
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const subject = formData.get("subject");
+  const message = formData.get("message");
+
+  // Basic validation
+  if (!name || !email || !subject || !message) {
+    return { error: "All fields are required." };
+  }
+
+  // TODO: Integrate with actual email service (e.g., Resend, SendGrid)
+  console.log("Contact Form Submission:", { name, email, subject, message });
+
+  return { success: true };
+}

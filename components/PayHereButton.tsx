@@ -70,7 +70,7 @@ export default function PayHereButton({
         window.payhere.onDismissed = function onDismissed() {
           setIsLoading(false);
         };
-        window.payhere.onError = function onError(error: any) {
+        window.payhere.onError = function onError(error: unknown) {
           console.error("PayHere Error:", error);
           setIsLoading(false);
           alert("Payment failed. Please try again.");

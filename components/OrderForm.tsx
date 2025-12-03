@@ -95,7 +95,7 @@ export default function OrderForm() {
             setFileName(null);
             if (fileInputRef.current) fileInputRef.current.value = "";
           }
-        } catch (e) {
+        } catch {
           setStatus("success");
         }
       } else {
@@ -107,7 +107,7 @@ export default function OrderForm() {
           } else {
             setErrors({ _form: [response.message || "Something went wrong"] });
           }
-        } catch (e) {
+        } catch {
           setErrors({ _form: ["An unexpected error occurred"] });
         }
       }

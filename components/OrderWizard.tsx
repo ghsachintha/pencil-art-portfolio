@@ -146,7 +146,7 @@ export default function OrderWizard() {
             // Fallback if no orderId (shouldn't happen with correct API)
             setStatus("success");
           }
-        } catch (e) {
+        } catch {
           setStatus("success");
         }
       } else {
@@ -158,7 +158,7 @@ export default function OrderWizard() {
           } else {
             setErrors({ _form: [response.message || "Something went wrong"] });
           }
-        } catch (e) {
+        } catch {
           setErrors({ _form: ["An unexpected error occurred"] });
         }
       }
@@ -217,7 +217,7 @@ export default function OrderWizard() {
         window.payhere.onDismissed = function onDismissed() {
           setStatus("idle"); // Reset status if dismissed so user can try again
         };
-        window.payhere.onError = function onError(error: any) {
+        window.payhere.onError = function onError(error: unknown) {
           console.error("PayHere Error:", error);
           setStatus("error");
           setErrors({ _form: ["Payment failed. Please try again."] });
@@ -456,7 +456,8 @@ export default function OrderWizard() {
                   </p>
                 </div>
                 <p className="text-xs text-neutral-500">
-                  By clicking "Place Order", you agree to the pricing and terms.
+                  By clicking &quot;Place Order&quot;, you agree to the pricing
+                  and terms.
                 </p>
               </div>
             )}

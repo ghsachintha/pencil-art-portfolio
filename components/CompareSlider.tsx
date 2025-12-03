@@ -4,9 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface CompareSliderProps {
-  sketch: any;
-  final: any;
+  sketch: SanityImageSource;
+  final: SanityImageSource;
 }
 
 export default function CompareSlider({ sketch, final }: CompareSliderProps) {

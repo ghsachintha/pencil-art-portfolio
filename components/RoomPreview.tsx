@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface RoomPreviewProps {
-  image: any;
+  image: SanityImageSource;
   isOpen: boolean;
   onClose: () => void;
 }

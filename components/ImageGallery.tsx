@@ -5,8 +5,10 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface ImageGalleryProps {
-  images: any[];
+  images: SanityImageSource[];
   title: string;
 }
 

@@ -4,11 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import RoomPreviewModal from "@/components/RoomPreviewModal";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface ProjectSidebarProps {
   title: string;
   description: string;
   completionDate?: string;
-  coverImage: any;
+  coverImage: SanityImageSource;
 }
 
 export default function ProjectSidebar({

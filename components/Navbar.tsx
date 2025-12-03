@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +38,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full py-6 border-b border-secondary/10 bg-white/80 backdrop-blur-md transition-all duration-300">
+    <nav className="fixed top-0 left-0 right-0 z-50 w-full py-6 border-b border-secondary/10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md transition-all duration-300">
       <div className="container flex items-center justify-between px-4 md:px-6">
         <Link
           href="/"
@@ -47,7 +48,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8 text-sm font-medium text-secondary">
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-secondary">
           {["Work", "About", "Order Art", "Contact"].map((item) => (
             <Link
               key={item}
@@ -64,32 +65,38 @@ export default function Navbar() {
               <span className="absolute left-0 -bottom-1 w-0 h-px bg-primary transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
+          <ThemeToggle />
         </div>
 
         {/* Mobile Hamburger Button */}
-        <button
-          onClick={toggleMenu}
-          className="md:hidden z-50 p-2 text-neutral-900 focus:outline-none"
-          aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
-        >
-          <div className="w-6 h-5 flex flex-col justify-between">
-            <motion.span
-              animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-              className="w-full h-0.5 bg-current block origin-center"
-            />
-            <motion.span
-              animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="w-full h-0.5 bg-current block"
-            />
-            <motion.span
-              animate={
-                isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
-              }
-              className="w-full h-0.5 bg-current block origin-center"
-            />
-          </div>
-        </button>
+        <div className="flex items-center gap-4 md:hidden z-50">
+          <ThemeToggle />
+          <button
+            onClick={toggleMenu}
+            className="p-2 text-neutral-900 dark:text-neutral-100 focus:outline-none"
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+          >
+            <div className="w-6 h-5 flex flex-col justify-between">
+              <motion.span
+                animate={
+                  isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }
+                }
+                className="w-full h-0.5 bg-current block origin-center"
+              />
+              <motion.span
+                animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="w-full h-0.5 bg-current block"
+              />
+              <motion.span
+                animate={
+                  isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
+                }
+                className="w-full h-0.5 bg-current block origin-center"
+              />
+            </div>
+          </button>
+        </div>
 
         {/* Mobile Menu Overlay */}
         <AnimatePresence>
@@ -99,7 +106,7 @@ export default function Navbar() {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed inset-0 bg-white flex flex-col items-center justify-center md:hidden"
+              className="fixed inset-0 bg-white dark:bg-neutral-900 flex flex-col items-center justify-center md:hidden"
             >
               <div className="flex flex-col gap-8 text-2xl font-serif font-medium text-center">
                 {[
@@ -112,7 +119,7 @@ export default function Navbar() {
                     <Link
                       href={link.href}
                       onClick={toggleMenu}
-                      className="hover:text-neutral-600 transition-colors"
+                      className="hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
                     >
                       {link.name}
                     </Link>

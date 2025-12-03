@@ -6,10 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { urlFor } from "@/sanity/lib/image";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface InteractiveGalleryProps {
-  coverImage: any;
-  sketchImage?: any;
-  gallery?: any[];
+  coverImage: SanityImageSource;
+  sketchImage?: SanityImageSource;
+  gallery?: SanityImageSource[];
   title: string;
 }
 

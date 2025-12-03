@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import InteractiveGallery from "@/components/InteractiveGallery";
 import ProjectSidebar from "@/components/ProjectSidebar";
+import RelatedWorks from "@/components/RelatedWorks";
 
 // Revalidate every 60 seconds
 export const revalidate = 60;
@@ -63,6 +64,8 @@ export default async function ProjectPage({ params }: Props) {
             />
           </div>
         </div>
+
+        <RelatedWorks currentSlug={slug} />
       </div>
     </main>
   );

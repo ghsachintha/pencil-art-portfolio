@@ -4,9 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
+import { SanityImageSource } from "@sanity/image-url";
+
 interface BeforeAfterSliderProps {
-  coverImage: any;
-  sketchImage: any;
+  coverImage: SanityImageSource;
+  sketchImage: SanityImageSource;
   title: string;
 }
 
@@ -38,10 +40,6 @@ export default function BeforeAfterSlider({
 
   const handleMouseDown = () => {
     setIsDragging(true);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
   };
 
   useEffect(() => {
