@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export default defineType({
   name: "portfolioItem",
-  title: "Portfolio Item",
+  title: "Portfolio Items",
   type: "document",
   fields: [
     defineField({
@@ -22,13 +22,30 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "image",
-      title: "Image",
+      name: "coverImage",
+      title: "Cover Image",
       type: "image",
       options: {
         hotspot: true,
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [{ type: "image" }],
+      validation: (rule) => rule.max(5),
+    }),
+    defineField({
+      name: "sketchImage",
+      title: "Rough Sketch",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      description:
+        "Optional. Upload the initial sketch to enable the Before/After slider.",
     }),
     defineField({
       name: "description",

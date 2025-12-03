@@ -1,8 +1,8 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "commission",
-  title: "Commission Request",
+  name: "order",
+  title: "Orders",
   type: "document",
   fields: [
     defineField({

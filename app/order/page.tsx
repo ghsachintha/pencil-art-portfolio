@@ -1,4 +1,4 @@
-import OrderForm from "@/components/OrderForm";
+import OrderWizard from "@/components/OrderWizard";
 
 export default function OrderPage() {
   return (
@@ -15,7 +15,7 @@ export default function OrderPage() {
         </div>
 
         <div className="bg-white p-8 shadow-xl rounded-sm border border-neutral-200">
-          <OrderForm />
+          <OrderWizard />
         </div>
       </div>
     </div>

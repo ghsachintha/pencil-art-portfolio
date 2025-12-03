@@ -25,7 +25,7 @@ export default async function AboutPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="container mx-auto px-4 py-12 max-w-5xl">
       <div className="grid md:grid-cols-2 gap-12 items-start">
         <div className="relative aspect-[3/4] w-full bg-gray-100 rounded-sm overflow-hidden shadow-sm">
           {profile.photo && (

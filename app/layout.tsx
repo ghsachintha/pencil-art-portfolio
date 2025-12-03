@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import NoiseOverlay from "@/components/NoiseOverlay";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -16,8 +19,8 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "Pencil Artist Portfolio",
-  description: "Portfolio of a pencil artist.",
+  title: "Pencil Art Portfolio",
+  description: "A collection of pencil drawings and sketches.",
 };
 
 export default function RootLayout({
@@ -28,9 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfair.variable} ${lato.variable} antialiased bg-background text-foreground font-sans`}
+        className={`${playfair.variable} ${lato.variable} antialiased bg-[var(--color-background)] text-[var(--color-foreground)] font-sans flex flex-col min-h-screen`}
       >
-        {children}
+        <NoiseOverlay />
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
