@@ -35,7 +35,7 @@ export default function RootLayout({
       >
         <NoiseOverlay />
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow pt-24">{children}</main>
         <Footer />
       </body>
     </html>

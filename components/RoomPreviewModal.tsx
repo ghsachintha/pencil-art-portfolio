@@ -3,11 +3,12 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { SanityImageSource } from "@sanity/image-url";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface RoomPreviewModalProps {
-  image: any;
+  image: SanityImageSource;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -20,6 +21,7 @@ export default function RoomPreviewModal({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     return () => setMounted(false);
   }, []);

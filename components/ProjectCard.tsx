@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { SanityImageSource } from "@sanity/image-url";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProjectCardProps {
   title: string;
   slug: string;
-  coverImage: any;
-  gallery?: any[];
+  coverImage: SanityImageSource;
+  gallery?: SanityImageSource[];
   completionDate?: string;
 }
 
@@ -41,8 +42,13 @@ export default function ProjectCard({
   }, [isHovered, images.length]);
 
   return (
-    <Link href={`/portfolio/${slug}`} className="group block">
-      <div
+    <Link
+      href={`/portfolio/${slug}`}
+      className="group block focus-visible:outline-none"
+    >
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className="relative aspect-[4/5] overflow-hidden bg-neutral-100 mb-4 rounded-sm"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
@@ -53,10 +59,10 @@ export default function ProjectCard({
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.div
             key={currentImageIndex}
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ type: "tween", ease: "easeInOut", duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
             <Image
@@ -71,8 +77,8 @@ export default function ProjectCard({
 
         {/* Overlay for hover state */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 pointer-events-none" />
-      </div>
-      <div className="flex justify-between items-baseline">
+      </motion.div>
+      <div className="flex justify-between items-baseline group-focus-visible:underline">
         <h3 className="text-xl font-serif font-medium text-neutral-900 group-hover:text-neutral-600 transition-colors">
           {title}
         </h3>

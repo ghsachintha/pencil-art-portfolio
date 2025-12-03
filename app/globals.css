@@ -18,6 +18,15 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -32,5 +41,11 @@
   h6 {
     font-family: var(--font-serif);
     font-weight: 700;
+  }
+
+  /* Custom Focus Ring for Accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 2px;
   }
 }
