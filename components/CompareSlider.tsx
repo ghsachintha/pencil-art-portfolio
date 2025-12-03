@@ -48,14 +48,29 @@ export default function CompareSlider({ sketch, final }: CompareSliderProps) {
     };
   }, []);
 
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") {
+      setSliderPosition((prev) => Math.max(0, prev - 5));
+    } else if (e.key === "ArrowRight") {
+      setSliderPosition((prev) => Math.min(100, prev + 5));
+    }
+  };
+
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-neutral-100 rounded-sm overflow-hidden cursor-ew-resize select-none"
+      className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-neutral-100 rounded-sm overflow-hidden cursor-ew-resize select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       onMouseMove={onMouseMove}
       onTouchMove={onTouchMove}
       onMouseDown={onMouseDown}
       onTouchStart={onTouchStart}
+      onKeyDown={onKeyDown}
+      tabIndex={0}
+      role="slider"
+      aria-label="Compare before and after images"
+      aria-valuenow={sliderPosition}
+      aria-valuemin={0}
+      aria-valuemax={100}
     >
       {/* Background Image (Final) */}
       <div className="absolute inset-0">

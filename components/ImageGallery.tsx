@@ -36,20 +36,21 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
       {/* Grid Layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {images.map((image, index) => (
-          <div
+          <button
             key={index}
-            className="relative aspect-[4/5] bg-neutral-50 rounded-sm overflow-hidden group cursor-pointer"
+            className="relative aspect-[4/5] bg-neutral-50 rounded-sm overflow-hidden group cursor-pointer w-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             onClick={() => setSelectedIndex(index)}
+            aria-label={`View ${title} gallery image ${index + 1}`}
           >
             <Image
               src={urlFor(image).url()}
-              alt={`${title} - Gallery ${index + 1}`}
+              alt=""
               fill
               className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
-          </div>
+          </button>
         ))}
       </div>
 
@@ -64,8 +65,9 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
             onClick={() => setSelectedIndex(null)}
           >
             <button
-              className="absolute top-4 right-4 text-white/70 hover:text-white z-50 p-2"
+              className="absolute top-4 right-4 text-white/70 hover:text-white z-50 p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={() => setSelectedIndex(null)}
+              aria-label="Close gallery"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,8 +86,9 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
             </button>
 
             <button
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-50 p-2 hidden sm:block"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-50 p-2 hidden sm:block focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={handlePrev}
+              aria-label="Previous image"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,8 +107,9 @@ export default function ImageGallery({ images, title }: ImageGalleryProps) {
             </button>
 
             <button
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-50 p-2 hidden sm:block"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white z-50 p-2 hidden sm:block focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
               onClick={handleNext}
+              aria-label="Next image"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

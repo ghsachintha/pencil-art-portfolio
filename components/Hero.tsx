@@ -14,7 +14,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="space-y-8 text-center md:text-left z-10"
         >
-          <h1 className="text-5xl md:text-7xl font-serif font-bold leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-serif font-bold leading-tight">
             Capturing <br />
             <span className="italic text-secondary">Soul</span> in <br />
             Graphite.
@@ -26,12 +26,13 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <Link
               href="/order"
-              className="px-8 py-4 bg-primary text-white rounded-sm hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all hover:scale-105 font-serif text-lg"
+              className="px-8 py-4 bg-primary text-[var(--color-text-inverted)] rounded-sm hover:opacity-90 shadow-sm hover:shadow-md active:scale-95 transition-all font-serif text-lg"
+              aria-label="Get your custom pencil portrait"
             >
-              Commission Art
+              Get Yours
             </Link>
             <Link
-              href="/portfolio"
+              href="/work"
               className="px-8 py-4 border border-primary text-primary rounded-sm hover:bg-primary/5 transition-all font-serif text-lg"
             >
               View Portfolio

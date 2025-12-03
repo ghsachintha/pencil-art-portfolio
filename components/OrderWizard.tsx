@@ -475,7 +475,7 @@ export default function OrderWizard() {
         {step < 4 ? (
           <button
             onClick={nextStep}
-            className="bg-primary text-inverted px-8 py-2 rounded-sm hover:opacity-90 transition-colors"
+            className="bg-primary text-[var(--color-text-inverted)] px-8 py-2 rounded-sm hover:opacity-90 transition-colors"
           >
             Next
           </button>
@@ -483,12 +483,12 @@ export default function OrderWizard() {
           <button
             onClick={handlePayment}
             disabled={status === "uploading" || status === "processing_payment"}
-            className="bg-primary text-inverted px-8 py-2 rounded-sm hover:opacity-90 transition-colors disabled:opacity-50 flex items-center gap-2"
+            className="bg-primary text-[var(--color-text-inverted)] px-8 py-2 rounded-sm hover:opacity-90 transition-colors disabled:opacity-50 flex items-center gap-2"
           >
             {status === "uploading" || status === "processing_payment" ? (
               <>
                 <svg
-                  className="animate-spin h-4 w-4 text-inverted"
+                  className="animate-spin h-4 w-4 text-[var(--color-text-inverted)]"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

@@ -43,7 +43,7 @@ export default function Testimonials() {
       name: "Sarah Jenkins",
       role: "Art Collector",
       quote:
-        "The attention to detail in the portrait I commissioned is absolutely breathtaking. It captures the spirit of the subject perfectly.",
+        "The attention to detail in the portrait I requested is absolutely breathtaking. It captures the spirit of the subject perfectly.",
       photo: null,
     },
     {
@@ -93,12 +93,46 @@ export default function Testimonials() {
             ease: "linear",
             repeat: Infinity,
           }}
+          whileHover={{ animationPlayState: "paused" }}
         >
-          {/* Duplicate list for infinite scroll */}
-          {[...displayTestimonials, ...displayTestimonials].map(
-            (testimonial, index) => (
+          {/* Original List */}
+          {displayTestimonials.map((testimonial, index) => (
+            <div
+              key={`${testimonial._id}-${index}`}
+              className="flex-shrink-0 w-[350px] md:w-[450px] p-8 bg-surface rounded-sm shadow-sm border border-border"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="relative w-12 h-12 rounded-full overflow-hidden bg-surface-highlight">
+                  {testimonial.photo && (
+                    <Image
+                      src={urlFor(testimonial.photo)
+                        .width(100)
+                        .height(100)
+                        .url()}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <div>
+                  <h4 className="font-serif font-bold text-primary">
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-sm text-muted">{testimonial.role}</p>
+                </div>
+              </div>
+              <p className="text-muted italic leading-relaxed">
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
+            </div>
+          ))}
+
+          {/* Duplicate list for infinite scroll (Hidden from screen readers) */}
+          <div className="flex gap-8" aria-hidden="true">
+            {displayTestimonials.map((testimonial, index) => (
               <div
-                key={`${testimonial._id}-${index}`}
+                key={`dup-${testimonial._id}-${index}`}
                 className="flex-shrink-0 w-[350px] md:w-[450px] p-8 bg-surface rounded-sm shadow-sm border border-border"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -126,8 +160,8 @@ export default function Testimonials() {
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
               </div>
-            )
-          )}
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

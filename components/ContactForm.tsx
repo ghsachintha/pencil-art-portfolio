@@ -125,7 +125,7 @@ export default function ContactForm() {
                 name="subject"
                 required
                 className="w-full px-4 py-3 bg-surface border border-border rounded-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
-                placeholder="Commission Inquiry"
+                placeholder="Portrait Inquiry"
               />
             </div>
 
@@ -155,7 +155,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="w-full py-4 bg-primary text-inverted font-serif font-bold rounded-sm hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 bg-primary text-[var(--color-text-inverted)] font-serif font-bold rounded-sm hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {status === "submitting" ? "Sending..." : "Send Message"}
             </button>

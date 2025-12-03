@@ -23,8 +23,17 @@ export default function RoomPreviewModal({
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-    return () => setMounted(false);
-  }, []);
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      setMounted(false);
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [onClose]);
 
   if (!mounted) return null;
 
@@ -37,6 +46,9 @@ export default function RoomPreviewModal({
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
           onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Room preview"
         >
           {/* Close Button - Fixed Positioning to escape all contexts */}
           <button

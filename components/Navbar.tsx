@@ -1,14 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { createPortal } from "react-dom";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -54,11 +61,11 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted">
-          {["Work", "About", "Order Art", "Contact"].map((item) => {
+          {["Work", "About", "Get Yours", "Contact"].map((item) => {
             const href =
               item === "Work"
                 ? "/work"
-                : item === "Order Art"
+                : item === "Get Yours"
                   ? "/order"
                   : `/${item.toLowerCase()}`;
 
@@ -112,37 +119,61 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              className="fixed inset-0 bg-surface flex flex-col items-center justify-center md:hidden"
-            >
-              <div className="flex flex-col gap-8 text-2xl font-serif font-medium text-center">
-                {[
-                  { name: "Work", href: "/work" },
-                  { name: "About", href: "/about" },
-                  { name: "Order Art", href: "/order" },
-                  { name: "Contact", href: "/contact" },
-                ].map((link) => (
-                  <motion.div key={link.name} variants={itemVariants}>
-                    <Link
-                      href={link.href}
-                      onClick={toggleMenu}
-                      className="hover:text-main transition-colors"
+        {/* Mobile Menu Overlay (Portal) */}
+        {mounted &&
+          createPortal(
+            <AnimatePresence>
+              {isMenuOpen && (
+                <motion.div
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  variants={menuVariants}
+                  className="fixed inset-0 z-[100] bg-background flex flex-col items-center justify-center md:hidden"
+                >
+                  <button
+                    onClick={toggleMenu}
+                    className="absolute top-6 right-4 p-2 text-foreground focus:outline-none"
+                    aria-label="Close menu"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-8 h-8"
                     >
-                      {link.name}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <div className="flex flex-col gap-8 text-2xl font-serif font-medium text-center">
+                    {[
+                      { name: "Work", href: "/work" },
+                      { name: "About", href: "/about" },
+                      { name: "Get Yours", href: "/order" },
+                      { name: "Contact", href: "/contact" },
+                    ].map((link) => (
+                      <motion.div key={link.name} variants={itemVariants}>
+                        <Link
+                          href={link.href}
+                          onClick={toggleMenu}
+                          className="hover:text-main transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>,
+            document.body
           )}
-        </AnimatePresence>
       </div>
     </nav>
   );

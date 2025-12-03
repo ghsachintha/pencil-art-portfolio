@@ -15,7 +15,7 @@ export default defineType({
       name: "role",
       title: "Role / Description",
       type: "string",
-      description: "e.g. 'Art Collector', 'Commission Client'",
+      description: "e.g. 'Art Collector', 'Client'",
     }),
     defineField({
       name: "quote",

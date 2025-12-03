@@ -123,7 +123,7 @@ export async function submitCommission(
       errors: {
         _form: ["Failed to submit commission. Please try again later."],
       },
-      message: "Failed to submit commission.",
+      message: "Failed to submit request.",
       inputs: {
         name,
         email,

@@ -6,7 +6,7 @@ export default function OrderPage() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-serif text-[var(--color-primary)] mb-4">
-            Order Art
+            Get Yours
           </h1>
           <p className="text-lg text-[var(--color-secondary)] max-w-xl mx-auto">
             Turn your favorite memories into timeless charcoal art. Please fill
