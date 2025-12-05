@@ -38,6 +38,19 @@ export default defineType({
       validation: (rule) => rule.max(5),
     }),
     defineField({
+      name: "size",
+      title: "Size",
+      type: "string",
+      options: {
+        list: [
+          { title: "A4", value: "A4" },
+          { title: "A3", value: "A3" },
+          { title: "A2", value: "A2" },
+        ],
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: "sketchImage",
       title: "Rough Sketch",
       type: "image",
@@ -56,6 +69,7 @@ export default defineType({
       name: "creationDate",
       title: "Creation Date",
       type: "date",
+      validation: (rule) => rule.required(),
     }),
   ],
 });

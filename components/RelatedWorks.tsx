@@ -17,7 +17,7 @@ interface Project {
   slug: string;
   coverImage: SanityImageSource;
   gallery: SanityImageSource[];
-  completionDate: string;
+  creationDate: string;
 }
 
 export default function RelatedWorks({ currentSlug }: RelatedWorksProps) {
@@ -34,7 +34,7 @@ export default function RelatedWorks({ currentSlug }: RelatedWorksProps) {
         "slug": slug.current,
         coverImage,
         gallery,
-        completionDate
+        creationDate
       }`;
 
       const data = await client.fetch(query, { currentSlug });
@@ -68,7 +68,7 @@ export default function RelatedWorks({ currentSlug }: RelatedWorksProps) {
             slug={project.slug}
             coverImage={project.coverImage}
             gallery={project.gallery}
-            completionDate={project.completionDate}
+            creationDate={project.creationDate}
           />
         ))}
       </div>

@@ -46,7 +46,7 @@ export default function Process() {
 
         <div className="grid md:grid-cols-4 gap-8 relative">
           {/* Connecting Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-neutral-200 dark:bg-neutral-800 -z-10" />
+          <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-neutral-400 dark:bg-neutral-800 -z-10" />
 
           {steps.map((step, index) => (
             <motion.div
@@ -57,8 +57,8 @@ export default function Process() {
               transition={{ delay: index * 0.2, duration: 0.5 }}
               className="relative flex flex-col items-center text-center group"
             >
-              <div className="w-24 h-24 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-200 dark:border-neutral-700 flex items-center justify-center mb-6 group-hover:border-primary transition-colors duration-300 z-10">
-                <span className="text-3xl font-serif font-bold text-neutral-300 group-hover:text-primary transition-colors duration-300">
+              <div className="w-24 h-24 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-400 dark:border-neutral-700 flex items-center justify-center mb-6 group-hover:border-primary transition-colors duration-300 z-10">
+                <span className="text-3xl font-serif font-bold text-neutral-600 dark:text-neutral-300 group-hover:text-primary transition-colors duration-300">
                   {step.number}
                 </span>
               </div>

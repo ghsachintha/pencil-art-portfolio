@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Project } from "@/types/project";
 import ProjectCard from "@/components/ProjectCard";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,6 +16,25 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedSize, setSelectedSize] = useState<SizeFilter>("All");
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsSortOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const filteredProjects = useMemo(() => {
     return initialProjects
@@ -37,8 +56,12 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
         return matchesSearch && matchesSize;
       })
       .sort((a, b) => {
-        const dateA = new Date(a.completionDate).getTime();
-        const dateB = new Date(b.completionDate).getTime();
+        const dateA = a.creationDate
+          ? new Date(a.creationDate).getTime()
+          : new Date(a._createdAt).getTime();
+        const dateB = b.creationDate
+          ? new Date(b.creationDate).getTime()
+          : new Date(b._createdAt).getTime();
         return sortOrder === "newest" ? dateB - dateA : dateA - dateB;
       });
   }, [initialProjects, searchQuery, selectedSize, sortOrder]);
@@ -46,18 +69,18 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
   return (
     <div className="space-y-8">
       {/* Filters Bar */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between bg-surface p-6 rounded-sm shadow-sm border border-border">
+      <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
         {/* Search */}
-        <div className="w-full md:w-1/3 relative">
+        <div className="w-full lg:w-96 relative group">
           <input
             type="text"
             placeholder="Search projects..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-surface-highlight border border-border rounded-sm focus:outline-none focus:border-strong transition-colors"
+            className="w-full pl-12 pr-6 py-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all shadow-sm group-hover:shadow-md"
           />
           <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400 group-focus-within:text-primary transition-colors"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -71,28 +94,92 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
           </svg>
         </div>
 
-        <div className="flex gap-4 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
-          {/* Size Filter */}
-          <select
-            value={selectedSize}
-            onChange={(e) => setSelectedSize(e.target.value as SizeFilter)}
-            className="px-4 py-2 bg-surface-highlight border border-border rounded-sm focus:outline-none cursor-pointer"
-          >
-            <option value="All">All Sizes</option>
-            <option value="A4">A4</option>
-            <option value="A3">A3</option>
-            <option value="A2">A2</option>
-          </select>
+        <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto items-center">
+          {/* Size Filter (Pills) */}
+          <div className="flex items-center gap-2 p-1 bg-neutral-100 dark:bg-neutral-900 rounded-full border border-neutral-200 dark:border-neutral-800">
+            {(["All", "A4", "A3", "A2"] as const).map((size) => (
+              <button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedSize === size
+                    ? "bg-white dark:bg-neutral-800 text-primary shadow-sm"
+                    : "text-neutral-500 hover:text-primary hover:bg-white/50 dark:hover:bg-neutral-800/50"
+                }`}
+              >
+                {size === "All" ? "All Sizes" : size}
+              </button>
+            ))}
+          </div>
 
-          {/* Sort Order */}
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value as SortOrder)}
-            className="px-4 py-2 bg-surface-highlight border border-border rounded-sm focus:outline-none cursor-pointer"
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-          </select>
+          {/* Sort Order (Custom Dropdown) */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsSortOpen(!isSortOpen)}
+              className="flex items-center gap-2 pl-4 pr-3 py-2 bg-transparent text-primary font-medium focus:outline-none cursor-pointer hover:opacity-80 transition-opacity"
+            >
+              <span>
+                {sortOrder === "newest" ? "Newest First" : "Oldest First"}
+              </span>
+              <motion.svg
+                animate={{ rotate: isSortOpen ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+                className="w-4 h-4 text-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </motion.svg>
+            </button>
+
+            <AnimatePresence>
+              {isSortOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  onMouseDown={(e) => e.preventDefault()}
+                  className="absolute right-0 top-full mt-2 w-40 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-xl overflow-hidden z-20"
+                >
+                  <div className="py-1">
+                    <button
+                      onClick={() => {
+                        setSortOrder("newest");
+                        setIsSortOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                        sortOrder === "newest"
+                          ? "bg-primary/5 text-primary font-medium"
+                          : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                      }`}
+                    >
+                      Newest First
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSortOrder("oldest");
+                        setIsSortOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
+                        sortOrder === "oldest"
+                          ? "bg-primary/5 text-primary font-medium"
+                          : "text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                      }`}
+                    >
+                      Oldest First
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 
@@ -117,7 +204,7 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
                   slug={project.slug}
                   coverImage={project.coverImage}
                   gallery={project.gallery}
-                  completionDate={project.completionDate}
+                  creationDate={project.creationDate}
                 />
               </motion.div>
             ))}

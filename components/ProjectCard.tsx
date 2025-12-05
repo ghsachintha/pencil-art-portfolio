@@ -12,7 +12,7 @@ interface ProjectCardProps {
   slug: string;
   coverImage: SanityImageSource;
   gallery?: SanityImageSource[];
-  completionDate?: string;
+  creationDate?: string;
 }
 
 export default function ProjectCard({
@@ -20,7 +20,7 @@ export default function ProjectCard({
   slug,
   coverImage,
   gallery = [],
-  completionDate,
+  creationDate,
 }: ProjectCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -82,9 +82,9 @@ export default function ProjectCard({
         <h3 className="text-xl font-serif font-medium text-main group-hover:text-muted transition-colors">
           {title}
         </h3>
-        {completionDate && (
+        {creationDate && (
           <span className="text-sm text-muted font-sans">
-            {new Date(completionDate).getFullYear()}
+            {new Date(creationDate).getFullYear()}
           </span>
         )}
       </div>

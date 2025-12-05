@@ -22,7 +22,7 @@ export default async function ProjectPage({ params }: Props) {
     coverImage,
     sketchImage,
     gallery,
-    completionDate
+    creationDate
   }`;
 
   const project = await client.fetch(query, { slug });
@@ -31,17 +31,11 @@ export default async function ProjectPage({ params }: Props) {
     notFound();
   }
 
-  const {
-    title,
-    description,
-    coverImage,
-    sketchImage,
-    gallery,
-    completionDate,
-  } = project;
+  const { title, description, coverImage, sketchImage, gallery, creationDate } =
+    project;
 
   return (
-    <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen pt-12 pb-12 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column (Span 2) */}
@@ -59,7 +53,7 @@ export default async function ProjectPage({ params }: Props) {
             <ProjectSidebar
               title={title}
               description={description}
-              completionDate={completionDate}
+              creationDate={creationDate}
               coverImage={coverImage}
             />
           </div>

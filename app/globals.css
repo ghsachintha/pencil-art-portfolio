@@ -93,6 +93,8 @@
   --color-accent: var(--color-accent);
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* =========================================
    Custom Utilities
    ========================================= */

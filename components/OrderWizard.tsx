@@ -10,6 +10,11 @@ import { generatePayHereHash } from "@/app/actions";
 type FormErrors = {
   name?: string[];
   email?: string[];
+  contactNumber?: string[];
+  addressLine1?: string[];
+  city?: string[];
+  postalCode?: string[];
+  country?: string[];
   size?: string[];
   details?: string[];
   photo?: string[];
@@ -38,6 +43,11 @@ export default function OrderWizard() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    contactNumber: "",
+    addressLine1: "",
+    city: "",
+    postalCode: "",
+    country: "",
     size: "",
     details: "",
   });
@@ -84,12 +94,33 @@ export default function OrderWizard() {
         newErrors.email = ["Invalid email format"];
         isValid = false;
       }
+      if (!formData.contactNumber.trim()) {
+        newErrors.contactNumber = ["Contact number is required"];
+        isValid = false;
+      }
     } else if (currentStep === 2) {
+      if (!formData.addressLine1.trim()) {
+        newErrors.addressLine1 = ["Address Line 1 is required"];
+        isValid = false;
+      }
+      if (!formData.city.trim()) {
+        newErrors.city = ["City is required"];
+        isValid = false;
+      }
+      if (!formData.postalCode.trim()) {
+        newErrors.postalCode = ["Postal Code is required"];
+        isValid = false;
+      }
+      if (!formData.country.trim()) {
+        newErrors.country = ["Country is required"];
+        isValid = false;
+      }
+    } else if (currentStep === 3) {
       if (!formData.size) {
         newErrors.size = ["Size is required"];
         isValid = false;
       }
-    } else if (currentStep === 3) {
+    } else if (currentStep === 4) {
       if (!fileName) {
         newErrors.photo = ["Reference photo is required"];
         isValid = false;
@@ -102,7 +133,7 @@ export default function OrderWizard() {
 
   const nextStep = () => {
     if (validateStep(step)) {
-      setStep((prev) => Math.min(prev + 1, 4));
+      setStep((prev) => Math.min(prev + 1, 5));
     }
   };
 
@@ -118,6 +149,11 @@ export default function OrderWizard() {
     const data = new FormData();
     data.append("name", formData.name);
     data.append("email", formData.email);
+    data.append("contactNumber", formData.contactNumber);
+    data.append("addressLine1", formData.addressLine1);
+    data.append("city", formData.city);
+    data.append("postalCode", formData.postalCode);
+    data.append("country", formData.country);
     data.append("size", formData.size);
     data.append("details", formData.details);
     if (file) {
@@ -205,10 +241,10 @@ export default function OrderWizard() {
         first_name: formData.name.split(" ")[0],
         last_name: formData.name.split(" ").slice(1).join(" ") || "",
         email: formData.email,
-        phone: "",
-        address: "",
-        city: "",
-        country: "Sri Lanka",
+        phone: formData.contactNumber,
+        address: `${formData.addressLine1}, ${formData.city}, ${formData.postalCode}`,
+        city: formData.city,
+        country: formData.country,
       };
 
       if (window.payhere) {
@@ -258,7 +294,7 @@ export default function OrderWizard() {
 
       {/* Progress Indicator */}
       <div className="flex justify-center gap-2 mb-8">
-        {[1, 2, 3, 4].map((i) => (
+        {[1, 2, 3, 4, 5].map((i) => (
           <div
             key={i}
             className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 ${
@@ -325,10 +361,128 @@ export default function OrderWizard() {
                     </p>
                   )}
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-main mb-1">
+                    Contact Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={handleInputChange}
+                    className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
+                      errors.contactNumber
+                        ? "border-red-500"
+                        : "border-border focus:border-primary"
+                    }`}
+                    placeholder="+94 77 123 4567"
+                  />
+                  {errors.contactNumber && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.contactNumber[0]}
+                    </p>
+                  )}
+                </div>
               </div>
             )}
 
             {step === 2 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-serif mb-4">Shipping Address</h2>
+                <div>
+                  <label className="block text-sm font-medium text-main mb-1">
+                    Address Line 1
+                  </label>
+                  <input
+                    type="text"
+                    name="addressLine1"
+                    value={formData.addressLine1}
+                    onChange={handleInputChange}
+                    className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
+                      errors.addressLine1
+                        ? "border-red-500"
+                        : "border-border focus:border-primary"
+                    }`}
+                    placeholder="123 Art Street"
+                  />
+                  {errors.addressLine1 && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.addressLine1[0]}
+                    </p>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-main mb-1">
+                      City
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
+                        errors.city
+                          ? "border-red-500"
+                          : "border-border focus:border-primary"
+                      }`}
+                      placeholder="Colombo"
+                    />
+                    {errors.city && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.city[0]}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-main mb-1">
+                      Postal Code
+                    </label>
+                    <input
+                      type="text"
+                      name="postalCode"
+                      value={formData.postalCode}
+                      onChange={handleInputChange}
+                      className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
+                        errors.postalCode
+                          ? "border-red-500"
+                          : "border-border focus:border-primary"
+                      }`}
+                      placeholder="10100"
+                    />
+                    {errors.postalCode && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.postalCode[0]}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-main mb-1">
+                    Country
+                  </label>
+                  <input
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
+                    className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
+                      errors.country
+                        ? "border-red-500"
+                        : "border-border focus:border-primary"
+                    }`}
+                    placeholder="Sri Lanka"
+                  />
+                  {errors.country && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.country[0]}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-serif mb-4">Order Details</h2>
                 <div>
@@ -339,7 +493,7 @@ export default function OrderWizard() {
                     name="size"
                     value={formData.size}
                     onChange={handleInputChange}
-                    className={`w-full border-b-2 bg-transparent py-2 px-1 focus:outline-none ${
+                    className={`w-full border-b-2 bg-transparent dark:bg-neutral-900 py-2 px-1 focus:outline-none ${
                       errors.size
                         ? "border-red-500"
                         : "border-border focus:border-primary"
@@ -374,7 +528,7 @@ export default function OrderWizard() {
               </div>
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-serif mb-4">Reference Photo</h2>
                 <div
@@ -420,7 +574,7 @@ export default function OrderWizard() {
               </div>
             )}
 
-            {step === 4 && (
+            {step === 5 && (
               <div className="space-y-6">
                 <h2 className="text-2xl font-serif mb-4">Review Order</h2>
                 <div className="bg-surface-highlight p-4 rounded-sm space-y-2 text-sm">
@@ -430,6 +584,22 @@ export default function OrderWizard() {
                   <p>
                     <span className="font-semibold">Email:</span>{" "}
                     {formData.email}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Phone:</span>{" "}
+                    {formData.contactNumber}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Address:</span>{" "}
+                    {formData.addressLine1}, {formData.city}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Postal Code:</span>{" "}
+                    {formData.postalCode}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Country:</span>{" "}
+                    {formData.country}
                   </p>
                   <p>
                     <span className="font-semibold">Size:</span> {formData.size}
@@ -472,7 +642,7 @@ export default function OrderWizard() {
           <div></div>
         )}
 
-        {step < 4 ? (
+        {step < 5 ? (
           <button
             onClick={nextStep}
             className="bg-primary text-[var(--color-text-inverted)] px-8 py-2 rounded-sm hover:opacity-90 transition-colors"

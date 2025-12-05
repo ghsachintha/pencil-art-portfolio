@@ -19,14 +19,15 @@ export default async function WorkPage() {
     "slug": slug.current,
     coverImage,
     gallery,
-    completionDate,
+    creationDate,
+    _createdAt,
     size
   }`;
 
   const projects: Project[] = await client.fetch(query);
 
   return (
-    <main className="min-h-screen pt-24 pb-12">
+    <main className="min-h-screen pt-12 pb-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">

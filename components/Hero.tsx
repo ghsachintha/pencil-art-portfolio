@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-12">
       <div className="container px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         {/* Text Content */}
         <motion.div
@@ -63,17 +64,29 @@ export default function Hero() {
             }}
             className="relative w-3/4 aspect-[3/4] bg-white dark:bg-neutral-800 shadow-2xl p-4 rotate-3 border border-neutral-100 dark:border-neutral-700"
           >
-            <div className="w-full h-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center overflow-hidden">
-              {/* Placeholder for actual artwork/video */}
-              <div className="text-neutral-300 dark:text-neutral-600 font-serif text-6xl opacity-20 select-none">
-                Art
-              </div>
-              {/* Animated Pencil Stroke (CSS) */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+            <div className="w-full h-full bg-neutral-100 dark:bg-neutral-900 flex items-center justify-center overflow-hidden relative">
+              {/* Actual Artwork with Reveal Effect */}
+              <motion.div
+                initial={{ opacity: 0, filter: "grayscale(100%) blur(2px)" }}
+                animate={{ opacity: 1, filter: "grayscale(0%) blur(0px)" }}
+                transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+                className="absolute inset-0 z-10"
+              >
+                <Image
+                  src="/images/hero-portrait.png"
+                  alt="Pencil Portrait"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </motion.div>
+
+              {/* Animated Pencil Stroke (Overlay) */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-40 z-20">
                 <motion.path
                   d="M50,50 Q150,150 250,50 T450,50"
                   fill="none"
-                  stroke="currentColor"
+                  className="stroke-neutral-500 dark:stroke-neutral-400"
                   strokeWidth="2"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}

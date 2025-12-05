@@ -9,14 +9,14 @@ import { SanityImageSource } from "@sanity/image-url";
 interface ProjectSidebarProps {
   title: string;
   description: string;
-  completionDate?: string;
+  creationDate?: string;
   coverImage: SanityImageSource;
 }
 
 export default function ProjectSidebar({
   title,
   description,
-  completionDate,
+  creationDate,
   coverImage,
 }: ProjectSidebarProps) {
   const [isRoomPreviewOpen, setIsRoomPreviewOpen] = useState(false);
@@ -24,31 +24,31 @@ export default function ProjectSidebar({
   return (
     <div className="sticky top-10 h-fit space-y-6">
       <div>
-        <h1 className="text-4xl font-serif font-bold text-neutral-900 mb-2">
+        <h1 className="text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100 mb-2">
           {title}
         </h1>
-        {completionDate && (
-          <p className="text-lg text-neutral-500 font-sans">
-            {new Date(completionDate).getFullYear()}
+        {creationDate && (
+          <p className="text-lg text-neutral-500 dark:text-neutral-400 font-sans">
+            {new Date(creationDate).getFullYear()}
           </p>
         )}
       </div>
 
-      <div className="prose prose-neutral max-w-none text-neutral-600">
+      <div className="prose prose-neutral dark:prose-invert max-w-none text-neutral-600 dark:text-neutral-300">
         <p>{description}</p>
       </div>
 
       <div className="pt-4 space-y-3">
         <Link
           href="/order"
-          className="block w-full text-center bg-neutral-900 text-white px-8 py-3 rounded-sm font-medium hover:bg-neutral-800 transition-colors"
+          className="block w-full text-center bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-8 py-3 rounded-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
         >
           Place Order
         </Link>
 
         <button
           onClick={() => setIsRoomPreviewOpen(true)}
-          className="block w-full text-center border border-neutral-300 text-neutral-700 px-8 py-3 rounded-sm font-medium hover:bg-neutral-50 transition-colors flex items-center justify-center gap-2"
+          className="block w-full text-center border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-8 py-3 rounded-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

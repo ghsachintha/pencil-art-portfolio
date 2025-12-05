@@ -16,11 +16,21 @@ export default async function Home() {
     title,
     "slug": slug.current,
     coverImage,
-    gallery,
-    completionDate
+    creationDate
   }`;
 
-  const projects = await client.fetch(query);
+  const testimonialsQuery = groq`*[_type == "testimonial"] {
+    _id,
+    name,
+    role,
+    quote,
+    photo
+  }`;
+
+  const [projects, testimonials] = await Promise.all([
+    client.fetch(query),
+    client.fetch(testimonialsQuery),
+  ]);
 
   return (
     <main className="min-h-screen">
@@ -41,15 +51,14 @@ export default async function Home() {
               title={project.title}
               slug={project.slug}
               coverImage={project.coverImage}
-              gallery={project.gallery}
-              completionDate={project.completionDate}
+              creationDate={project.creationDate}
             />
           ))}
         </div>
       </div>
 
       <Process />
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
     </main>
   );
 }

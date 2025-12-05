@@ -14,6 +14,11 @@ const client = createClient({
 const orderSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
+  contactNumber: z.string().min(1, "Contact number is required"),
+  addressLine1: z.string().min(1, "Address Line 1 is required"),
+  city: z.string().min(1, "City is required"),
+  postalCode: z.string().min(1, "Postal Code is required"),
+  country: z.string().min(1, "Country is required"),
   size: z.enum(["A4", "A3", "A2"] as const, {
     message: "Please select a valid size",
   }),
@@ -26,6 +31,11 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
+    const contactNumber = formData.get("contactNumber") as string;
+    const addressLine1 = formData.get("addressLine1") as string;
+    const city = formData.get("city") as string;
+    const postalCode = formData.get("postalCode") as string;
+    const country = formData.get("country") as string;
     const size = formData.get("size") as string;
     const details = formData.get("details") as string;
     const photo = formData.get("photo") as File;
@@ -34,6 +44,11 @@ export async function POST(request: Request) {
     const validatedFields = orderSchema.safeParse({
       name,
       email,
+      contactNumber,
+      addressLine1,
+      city,
+      postalCode,
+      country,
       size,
       details,
     });
@@ -101,6 +116,11 @@ export async function POST(request: Request) {
       _type: "order",
       customerName: name,
       email,
+      contactNumber,
+      addressLine1,
+      city,
+      postalCode,
+      country,
       drawingSize: size,
       details,
       referencePhoto: {
