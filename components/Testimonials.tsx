@@ -29,7 +29,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-20 bg-neutral-50 dark:bg-neutral-900/50">
+    <section className="py-20 bg-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
@@ -47,7 +47,7 @@ export default function Testimonials({ testimonials }: TestimonialsProps) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5 }}
-                className="text-center w-full"
+                className="text-center w-full bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md border border-white/20 dark:border-neutral-700/30 p-8 rounded-lg shadow-sm"
               >
                 <div className="mb-8">
                   <svg

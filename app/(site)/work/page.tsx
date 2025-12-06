@@ -27,7 +27,7 @@ export default async function WorkPage() {
   const projects: Project[] = await client.fetch(query);
 
   return (
-    <main className="min-h-screen pt-12 pb-12">
+    <div className="min-h-screen pt-40 pb-12">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">
@@ -41,6 +41,6 @@ export default async function WorkPage() {
 
         <WorkGallery initialProjects={projects} />
       </div>
-    </main>
+    </div>
   );
 }

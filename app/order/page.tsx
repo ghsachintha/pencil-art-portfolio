@@ -2,7 +2,7 @@ import OrderWizard from "@/components/OrderWizard";
 
 export default function OrderPage() {
   return (
-    <div className="min-h-screen bg-[var(--color-background)] pt-12 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen pt-40 pb-12 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-serif text-[var(--color-primary)] mb-4">

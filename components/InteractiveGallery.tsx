@@ -7,6 +7,7 @@ import { urlFor } from "@/sanity/lib/image";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 
 import { SanityImageSource } from "@sanity/image-url";
+import { GlassContainer } from "./GlassContainer";
 
 interface InteractiveGalleryProps {
   coverImage: SanityImageSource;
@@ -29,7 +30,10 @@ export default function InteractiveGallery({
   return (
     <div className="space-y-4">
       {/* Main Stage */}
-      <div className="relative w-full h-[50vh] md:h-[600px] bg-neutral-50 rounded-sm overflow-hidden flex items-center justify-center border border-neutral-100">
+      <GlassContainer
+        intensity="regular"
+        className="relative w-full h-[50vh] md:h-[600px] flex items-center justify-center overflow-hidden"
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={activeImageIndex}
@@ -37,10 +41,10 @@ export default function InteractiveGallery({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="w-full h-full flex items-center justify-center"
+            className="w-full h-full flex items-center justify-center p-4"
           >
             {activeImageIndex === 0 && sketchImage ? (
-              <div className="w-full h-full">
+              <div className="w-full h-full rounded-lg overflow-hidden relative shadow-inner border border-glass-border">
                 <BeforeAfterSlider
                   coverImage={coverImage}
                   sketchImage={sketchImage}
@@ -48,7 +52,7 @@ export default function InteractiveGallery({
                 />
               </div>
             ) : (
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full rounded-lg overflow-hidden shadow-inner border border-glass-border bg-white/50 dark:bg-black/20">
                 <Image
                   src={urlFor(allImages[activeImageIndex]).url()}
                   alt={`${title} - View ${activeImageIndex + 1}`}
@@ -60,7 +64,7 @@ export default function InteractiveGallery({
             )}
           </motion.div>
         </AnimatePresence>
-      </div>
+      </GlassContainer>
 
       {/* Thumbnails */}
       <div className="flex gap-4 overflow-x-auto pb-2 snap-x scrollbar-hide">

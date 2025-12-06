@@ -6,6 +6,7 @@ import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { SanityImageSource } from "@sanity/image-url";
 import { motion, AnimatePresence } from "framer-motion";
+import { GlassContainer } from "./GlassContainer";
 
 interface ProjectCardProps {
   title: string;
@@ -46,10 +47,12 @@ export default function ProjectCard({
       href={`/portfolio/${slug}`}
       className="group block focus-visible:outline-none"
     >
-      <motion.div
+      <GlassContainer
+        as={motion.div}
+        intensity="thin"
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative aspect-[4/5] overflow-hidden bg-surface-highlight mb-4 rounded-sm"
+        className="relative aspect-[4/5] overflow-hidden mb-4 group-hover:shadow-glass hover:bg-material-regular/50 transition-all"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
           setIsHovered(false);
@@ -77,7 +80,7 @@ export default function ProjectCard({
 
         {/* Overlay for hover state */}
         <div className="absolute inset-0 bg-transparent group-hover:bg-surface-overlay transition-colors duration-300 pointer-events-none" />
-      </motion.div>
+      </GlassContainer>
       <div className="flex justify-between items-baseline group-focus-visible:underline">
         <h3 className="text-xl font-serif font-medium text-main group-hover:text-muted transition-colors">
           {title}

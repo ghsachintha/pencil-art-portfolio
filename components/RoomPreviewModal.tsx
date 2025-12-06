@@ -44,7 +44,7 @@ export default function RoomPreviewModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4 backdrop-blur-md"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
@@ -81,7 +81,7 @@ export default function RoomPreviewModal({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className="relative w-full max-w-5xl aspect-[16/9] bg-[#e5e5e5] shadow-2xl overflow-hidden flex items-center justify-center rounded-lg"
+            className="relative w-full max-w-5xl aspect-[16/9] bg-[#e5e5e5] shadow-2xl overflow-hidden flex items-center justify-center rounded-lg border border-white/20"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Wall Texture/Gradient */}

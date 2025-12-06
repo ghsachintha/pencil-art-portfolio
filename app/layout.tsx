@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import NoiseOverlay from "@/components/NoiseOverlay";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Cursor from "@/components/Cursor";
+import Background from "@/components/Background";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -42,9 +43,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Cursor />
+          <Background />
           <NoiseOverlay />
           <Navbar />
-          <main className="flex-grow pt-24">{children}</main>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

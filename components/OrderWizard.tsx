@@ -286,11 +286,8 @@ export default function OrderWizard() {
   }
 
   return (
-    <div className="w-full max-w-lg mx-auto min-h-[400px] flex flex-col">
-      <Script
-        src="https://www.payhere.lk/lib/payhere.js"
-        strategy="lazyOnload"
-      />
+    <div className="w-full max-w-lg mx-auto min-h-[400px] flex flex-col bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md border border-white/20 dark:border-neutral-700/30 p-8 rounded-lg shadow-sm">
+      <Script src="/lib/payhere.js" strategy="lazyOnload" />
 
       {/* Progress Indicator */}
       <div className="flex justify-center gap-2 mb-8">

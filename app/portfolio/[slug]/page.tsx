@@ -35,7 +35,13 @@ export default async function ProjectPage({ params }: Props) {
     project;
 
   return (
-    <main className="min-h-screen pt-12 pb-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-40 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background Blobs */}
+      <div className="absolute inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-purple-300/20 dark:bg-purple-900/10 rounded-full blur-[100px] animate-blob mix-blend-multiply dark:mix-blend-screen" />
+        <div className="absolute bottom-[10%] right-[-10%] w-[500px] h-[500px] bg-blue-300/20 dark:bg-blue-900/10 rounded-full blur-[100px] animate-blob animation-delay-4000 mix-blend-multiply dark:mix-blend-screen" />
+      </div>
+
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Column (Span 2) */}
@@ -61,6 +67,6 @@ export default async function ProjectPage({ params }: Props) {
 
         <RelatedWorks currentSlug={slug} />
       </div>
-    </main>
+    </div>
   );
 }

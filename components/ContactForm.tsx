@@ -29,7 +29,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full max-w-lg mx-auto bg-white/40 dark:bg-neutral-900/40 backdrop-blur-md border border-white/20 dark:border-neutral-700/30 p-8 rounded-lg shadow-sm">
       <AnimatePresence mode="wait">
         {status === "success" ? (
           <motion.div

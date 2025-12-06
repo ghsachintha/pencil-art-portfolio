@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  httpAgentOptions: {
+    keepAlive: false,
+  },
 };
 
 export default nextConfig;

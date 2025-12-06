@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import RoomPreviewModal from "@/components/RoomPreviewModal";
+import { GlassButton } from "./GlassButton";
+import { GlassContainer } from "./GlassContainer";
 
 import { SanityImageSource } from "@sanity/image-url";
 
@@ -22,33 +24,38 @@ export default function ProjectSidebar({
   const [isRoomPreviewOpen, setIsRoomPreviewOpen] = useState(false);
 
   return (
-    <div className="sticky top-10 h-fit space-y-6">
+    <GlassContainer
+      intensity="thin"
+      className="sticky top-24 h-fit p-8 space-y-8"
+    >
       <div>
-        <h1 className="text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+        <h1 className="text-4xl md:text-5xl font-serif font-bold text-text-main mb-3">
           {title}
         </h1>
         {creationDate && (
-          <p className="text-lg text-neutral-500 dark:text-neutral-400 font-sans">
-            {new Date(creationDate).getFullYear()}
+          <p className="text-lg text-text-muted font-sans font-medium tracking-wide">
+            {new Date(creationDate).getFullYear()} • Pencil on Paper
           </p>
         )}
       </div>
 
-      <div className="prose prose-neutral dark:prose-invert max-w-none text-neutral-600 dark:text-neutral-300">
+      <div className="prose prose-lg dark:prose-invert max-w-none text-text-muted leading-relaxed">
         <p>{description}</p>
       </div>
 
-      <div className="pt-4 space-y-3">
-        <Link
-          href="/order"
-          className="block w-full text-center bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-8 py-3 rounded-sm font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-        >
-          Place Order
+      <div className="pt-4 space-y-4">
+        <Link href="/order" className="block w-full">
+          <GlassButton size="lg" fullWidth className="rounded-xl">
+            Place Order
+          </GlassButton>
         </Link>
 
-        <button
+        <GlassButton
+          variant="secondary"
+          size="lg"
+          fullWidth
           onClick={() => setIsRoomPreviewOpen(true)}
-          className="block w-full text-center border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 px-8 py-3 rounded-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2"
+          className="rounded-xl flex items-center justify-center gap-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +72,7 @@ export default function ProjectSidebar({
             />
           </svg>
           View on Wall
-        </button>
+        </GlassButton>
       </div>
 
       <RoomPreviewModal
@@ -73,6 +80,6 @@ export default function ProjectSidebar({
         isOpen={isRoomPreviewOpen}
         onClose={() => setIsRoomPreviewOpen(false)}
       />
-    </div>
+    </GlassContainer>
   );
 }
