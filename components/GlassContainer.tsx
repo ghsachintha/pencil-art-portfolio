@@ -6,7 +6,7 @@ interface GlassContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   intensity?: "thin" | "regular" | "thick";
   className?: string;
   as?: React.ElementType;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export const GlassContainer: React.FC<GlassContainerProps> = ({
@@ -25,7 +25,7 @@ export const GlassContainer: React.FC<GlassContainerProps> = ({
   return (
     <Component
       className={cn(
-        "rounded-2xl border border-glass-border shadow-glass transition-all duration-300",
+        "rounded-2xl border border-glass-border shadow-glass-sheen transition-all duration-300",
         intensityStyles[intensity],
         className
       )}

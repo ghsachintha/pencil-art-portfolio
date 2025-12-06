@@ -15,6 +15,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
@@ -52,7 +53,7 @@ export default function Navbar() {
           className={cn(
             "pointer-events-auto flex items-center justify-between px-6 py-3 transition-all duration-500",
             scrolled || isMenuOpen
-              ? "w-[95%] md:w-[85%] lg:w-[70%] rounded-2xl bg-material-thick/80 backdrop-blur-glass-thick shadow-glass border border-glass-border"
+              ? "w-[95%] md:w-[85%] lg:w-[70%] rounded-full bg-material-thick/80 backdrop-blur-glass-thick shadow-glass border border-glass-border"
               : "w-full bg-transparent border-transparent px-8"
           )}
         >
@@ -81,8 +82,8 @@ export default function Navbar() {
                   className={cn(
                     "relative px-4 py-2 rounded-full transition-all duration-300 hover:text-text-main",
                     active
-                      ? "text-text-main bg-surface-overlay shadow-sm"
-                      : "hover:bg-surface-overlay/50"
+                      ? "text-text-main bg-material-regular backdrop-blur-glass-thin shadow-glass-sheen border border-glass-border"
+                      : "hover:bg-surface-overlay/50 border border-transparent"
                   )}
                 >
                   {item}

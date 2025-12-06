@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { GlassContainer } from "./GlassContainer";
 
 interface GlassButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -42,7 +41,7 @@ export const GlassButton: React.FC<GlassButtonProps> = ({
         variants[variant],
         sizes[size],
         fullWidth ? "w-full" : "",
-        "border backdrop-blur-glass-thin shadow-sm hover:shadow-glass",
+        "border backdrop-blur-glass-thin shadow-glass-sheen hover:shadow-glass-hover hover:-translate-y-0.5",
         className
       )}
       {...props}

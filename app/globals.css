@@ -43,21 +43,37 @@
   --color-accent: var(--color-base-neutral-300);
 
   /* --- Glass Materials (Light Mode) --- */
-  --material-thick: rgba(255, 225, 255, 0.75);
-  --material-regular: rgba(255, 255, 255, 0.6);
-  --material-thin: rgba(255, 255, 255, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-  --glass-blur-thick: 20px;
-  --glass-blur-regular: 12px;
-  --glass-blur-thin: 8px;
+  --material-thick: rgba(255, 255, 255, 0.4);
+  --material-regular: rgba(255, 255, 255, 0.25);
+  --material-thin: rgba(255, 255, 255, 0.1);
+
+  /* High-quality "Liquid" border and glow */
+  --glass-border: rgba(255, 255, 255, 0.7); /* Much more visible border */
+  --glass-border-highlight: rgba(255, 255, 255, 1);
+
+  /* Stronger inner sheen + Bottom Rim Highlight */
+  --glass-sheen:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
+    /* Top rim */ inset 0 -1px 1px 0 rgba(255, 255, 255, 0.5),
+    /* Bottom rim highlight */ inset 0 0 20px 0 rgba(255, 255, 255, 0.1); /* General glassy volume */
+
+  --glass-shadow:
+    0 8px 30px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+
+  /* Hover shadow: Removes dark ring, adds soft light glow and stronger drop shadow */
+  --glass-shadow-hover:
+    0 20px 40px -5px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5);
+
+  --glass-blur-thick: 50px; /* Increased blur for "frosted" feel */
+  --glass-blur-regular: 30px;
+  --glass-blur-thin: 15px;
 }
 
 .dark {
   /* --- Semantic Tokens (Dark Mode) --- */
 
   /* Backgrounds */
-  --color-background: #1a1a1a;
+  --color-background: #050505; /* Deeper black for contrast */
   --color-surface: var(--color-base-neutral-900);
   --color-surface-highlight: var(--color-base-neutral-800);
   --color-surface-overlay: rgba(255, 255, 255, 0.1); /* Used for hovers */
@@ -77,11 +93,19 @@
   --color-accent: var(--color-base-neutral-700);
 
   /* --- Glass Materials (Dark Mode) --- */
-  --material-thick: rgba(30, 30, 30, 0.75);
-  --material-regular: rgba(30, 30, 30, 0.6);
-  --material-thin: rgba(30, 30, 30, 0.4);
+  --material-thick: rgba(20, 20, 20, 0.3);
+  --material-regular: rgba(20, 20, 20, 0.2);
+  --material-thin: rgba(255, 255, 255, 0.03);
+
   --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --glass-border-highlight: rgba(255, 255, 255, 0.2);
+
+  --glass-sheen:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 0 20px 0 rgba(255, 255, 255, 0.02);
+
+  --glass-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+  --glass-shadow-hover: 0 25px 50px -10px rgba(0, 0, 0, 0.6);
 }
 
 /* =========================================
@@ -117,6 +141,8 @@
   --color-glass-border: var(--glass-border);
 
   --shadow-glass: var(--glass-shadow);
+  --shadow-glass-hover: var(--glass-shadow-hover);
+  --shadow-glass-sheen: var(--glass-sheen);
 
   --blur-glass-thick: var(--glass-blur-thick);
   --blur-glass-regular: var(--glass-blur-regular);

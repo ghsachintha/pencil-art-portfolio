@@ -1,5 +1,6 @@
 "use client";
 
+import { GlassContainer } from "./GlassContainer";
 import { motion } from "framer-motion";
 
 const steps = [
@@ -31,22 +32,25 @@ const steps = [
 
 export default function Process() {
   return (
-    <section className="py-24 bg-white dark:bg-neutral-900">
+    <section className="py-24 relative overflow-hidden bg-material-thin/40 backdrop-blur-glass-regular border-y border-glass-border">
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-purple-500/5 dark:bg-purple-900/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
+
       <div className="container px-4 md:px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-serif font-bold text-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-text-main mb-4">
             The Process
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
-          <p className="mt-4 text-secondary max-w-2xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full opacity-80" />
+          <p className="mt-4 text-text-muted max-w-2xl mx-auto text-lg font-light">
             From the first conversation to the final stroke, every step is
             handled with care and precision.
           </p>
         </div>
 
         <div className="grid md:grid-cols-4 gap-8 relative">
-          {/* Connecting Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-neutral-400 dark:bg-neutral-800 -z-10" />
+          {/* Connecting Line (Desktop) - Glassy */}
+          <div className="hidden md:block absolute top-[3.75rem] left-0 right-0 h-px bg-gradient-to-r from-transparent via-glass-border-highlight to-transparent opacity-50 -z-10" />
 
           {steps.map((step, index) => (
             <motion.div
@@ -57,15 +61,19 @@ export default function Process() {
               transition={{ delay: index * 0.2, duration: 0.5 }}
               className="relative flex flex-col items-center text-center group"
             >
-              <div className="w-24 h-24 rounded-full bg-white dark:bg-neutral-900 border-2 border-neutral-400 dark:border-neutral-700 flex items-center justify-center mb-6 group-hover:border-primary transition-colors duration-300 z-10">
-                <span className="text-3xl font-serif font-bold text-neutral-600 dark:text-neutral-300 group-hover:text-primary transition-colors duration-300">
+              <GlassContainer
+                intensity="regular"
+                className="w-32 h-32 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500"
+              >
+                <span className="text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-br from-text-main to-text-muted opacity-80 group-hover:opacity-100 transition-opacity">
                   {step.number}
                 </span>
-              </div>
-              <h3 className="text-xl font-serif font-bold text-primary mb-3">
+              </GlassContainer>
+
+              <h3 className="text-xl font-serif font-bold text-text-main mb-3">
                 {step.title}
               </h3>
-              <p className="text-secondary text-sm leading-relaxed">
+              <p className="text-text-muted text-sm leading-relaxed">
                 {step.description}
               </p>
             </motion.div>

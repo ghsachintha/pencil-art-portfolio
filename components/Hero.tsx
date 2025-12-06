@@ -27,7 +27,7 @@ export default function Hero() {
           <div className="relative inline-block">
             <h1 className="text-5xl md:text-6xl lg:text-8xl font-serif font-bold leading-[1.1] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-text-main to-text-muted">
               Capturing <br />
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 pr-6 inline-block">
                 Soul
               </span>{" "}
               in <br />
@@ -95,43 +95,6 @@ export default function Hero() {
                 {/* Texture Overlay */}
                 <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay bg-[url('/noise.png')]"></div>
               </div>
-            </GlassContainer>
-          </motion.div>
-
-          {/* Background Decor Elements (Blurred Glass Shapes) */}
-          <motion.div
-            animate={{ y: [0, 30, 0], rotate: [0, -10, 0] }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1,
-            }}
-            className="absolute md:right-10 md:top-20 z-10"
-          >
-            <GlassContainer
-              intensity="thin"
-              className="w-40 h-40 rounded-full backdrop-blur-3xl flex items-center justify-center border-white/10"
-            >
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-xl" />
-            </GlassContainer>
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, -40, 0], rotate: [0, 15, 0] }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-            className="absolute md:left-20 md:bottom-20 z-0"
-          >
-            <GlassContainer
-              intensity="regular"
-              className="w-32 h-32 rounded-3xl backdrop-blur-2xl border-white/5"
-            >
-              <div />
             </GlassContainer>
           </motion.div>
         </motion.div>
