@@ -71,17 +71,10 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
         <div className="w-full lg:w-96 relative group z-30">
           <GlassContainer
             intensity="regular"
-            className="rounded-full relative overflow-hidden shadow-glass-sheen"
+            className="rounded-full flex items-center px-4 py-2 shadow-glass-sheen"
           >
-            <input
-              type="text"
-              placeholder="Search projects..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-6 py-3 bg-transparent text-text-main placeholder:text-text-muted focus:outline-none relative z-10"
-            />
             <svg
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted group-focus-within:text-text-main transition-colors z-10"
+              className="w-5 h-5 text-text-muted group-focus-within:text-text-main transition-colors flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -93,6 +86,13 @@ export default function WorkGallery({ initialProjects }: WorkGalleryProps) {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
+            <input
+              type="text"
+              placeholder="Search projects..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-64 bg-transparent text-text-main placeholder:text-text-muted focus:outline-none px-3 py-1"
+            />
           </GlassContainer>
         </div>
 

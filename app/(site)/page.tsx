@@ -17,6 +17,7 @@ export default async function Home() {
     title,
     "slug": slug.current,
     coverImage,
+    gallery,
     creationDate
   }`;
 
@@ -54,6 +55,7 @@ export default async function Home() {
                 title={project.title}
                 slug={project.slug}
                 coverImage={project.coverImage}
+                gallery={project.gallery}
                 creationDate={project.creationDate}
               />
             </ScrollReveal>
